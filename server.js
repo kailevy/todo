@@ -21,11 +21,7 @@ app.use(methodOverride());
 var PORT = process.env.PORT || 4000;
 
 // routes
-var routes = require('./app/routes.js');
-app.get('*', routes.home);
-app.get('/api/todos',routes.getAllTodos);
-app.post('/api/todos',routes.createTodo);
-app.delete('api/todos/:todo_id',routes.deleteTodos);
+require('./app/routes.js')(app);
 
 // listen
 app.listen(PORT, function() {

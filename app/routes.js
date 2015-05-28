@@ -11,46 +11,44 @@ function getTodos(res){
   });
 }
 
-// for get request
-var getAllTodos = function(req, res) {
-  getTodos(res);
-};
+module.exports = function(app) {
 
-// for post request
-var createTodo = function(req, res) {
-  // make todo with AJAX request from Angular
-  Todo.create({
-    text: req.body.text,
-    done: false
-  }, function(err, todo) {
-    if (err) {
-      res.send(err);
-    }
-    // get all todos afterwards
+
+  app.get('/api/todos', function(req, res) {
+
     getTodos(res);
   });
-};
 
-// for delete request (?)
-var deleteTodo = function(req, res) {
-  Todo.remove({
-    _id: req.params.todo_id
-  }, function(err,todo) {
-    if (err) {
-      res.send(err);
-    }
-    // get all todos afterwards
-    getTodos(res);
+  // create todo and send back all todos after creation
+  app.post('/api/todos', function(req, res) {
+
+    // create a todo, information comes from AJAX request from Angular
+    Todo.create({
+      text : req.body.text,
+      done : false
+    }, function(err, todo) {
+      if (err)
+        res.send(err);
+
+      getTodos(res);
+    });
+
+  });
+
+  // delete a todo
+  app.delete('/api/todos/:todo_id', function(req, res) {
+    Todo.remove({
+      _id : req.params.todo_id
+    }, function(err, todo) {
+      if (err)
+        res.send(err);
+
+      getTodos(res);
+    });
+  });
+
+  // application -------------------------------------------------------------
+  app.get('*', function(req, res) {
+    res.sendfile('./public/index.html'); 
   });
 };
-
-// loads view files
-var home = function(req, res) {
-  res.sendFile('./public/index.html'); 
-};
-
-// export the functions for server.js
-module.exports.getAllTodos = getAllTodos
-module.exports.createTodo = createTodo
-module.exports.deleteTodo = deleteTodo
-module.exports.home = home
