@@ -1,0 +1,2 @@
+Simple todo app using Mongo, Express, Angular, Node.
+Based off of tutorial available here: https://scotch.io/tutorials/creating-a-single-page-todo-app-with-node-and-angular
