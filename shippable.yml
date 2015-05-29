@@ -3,7 +3,7 @@ language: node_js
 node_js: 
     - 0.10
 
-build_image: shippableimages/ubuntu1404_nodejs
+# build_image: shippableimages/ubuntu1404_nodejs
 
 services:
     - mongodb
@@ -17,5 +17,4 @@ install:
     - npm install
 
 script:
-    - mongod
     - grunt
