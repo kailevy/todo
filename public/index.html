@@ -2,8 +2,10 @@
 <html ng-app="myTodo">
 <head>
     <title>Todo App</title>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"><!-- load bootstrap -->
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"><!-- load bootstrap -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="stylesheets/awesome-bootstrap-checkbox.css">
+    <link rel="stylesheet" href="stylesheets/style.css">
     <style>
         html                    { overflow-y:scroll; }
         body                    { padding-top:50px; }
@@ -29,15 +31,16 @@
 
         <!-- TODO LIST -->
         <div id="todo-list" class="row">
-            <div class="col-sm-4 col-sm-offset-4">
-
-                
-
+            <div class="col-sm-8 col-sm-offset-2">                
                 <!-- LOOP OVER THE TODOS IN $scope.todos -->
-                <div class="checkbox" ng-repeat="todo in todos">
-                    <label>
-                        <input type="checkbox" ng-click="deleteTodo(todo._id)"> {{ todo.text }}
-                    </label>
+                <div ng-repeat="todo in todos">
+                    <div class="alert alert-info">
+                        <div class="checkbox">
+                            <label>
+                                <input id="checkbox" type="checkbox" ng-click="deleteTodo(todo._id)"> {{ todo.text }}
+                            </label>
+                        </div>
+                    </div>
                 </div>
 
             </div>
