@@ -8,7 +8,7 @@ var methodOverride = require('method-override');
 var app = express();
 
 // configs
-mongoURI = process.env.MONGOURI || "mongodb://localhost";
+mongoURI = process.env.MONGOURI || "mongodb://localhost/test";
 mongoose.connect(mongoURI, function(err) {
   if (!err) {
     console.log("Connected to database");

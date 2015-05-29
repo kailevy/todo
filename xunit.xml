@@ -1,4 +1,4 @@
-<testsuite name="Mocha Tests" tests="2" failures="0" errors="0" skipped="0" timestamp="Fri, 29 May 2015 16:26:41 GMT" time="0.056">
+<testsuite name="Mocha Tests" tests="2" failures="0" errors="0" skipped="0" timestamp="Fri, 29 May 2015 17:59:50 GMT" time="0.054">
 <testcase classname="Index" name="renders HTML" time="0.014"/>
-<testcase classname="Post" name="sends a post request" time="0.04"/>
+<testcase classname="Post" name="sends a post request" time="0.037"/>
 </testsuite>
