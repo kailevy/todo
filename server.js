@@ -9,7 +9,14 @@ var app = express();
 
 // configs
 mongoURI = process.env.MONGOURI || "mongodb://localhost";
-mongoose.connect(mongoURI);
+mongoose.connect(mongoURI, function(err) {
+  if (!err) {
+    console.log("Connected to database");
+  } else {
+    console.log(err);
+  }
+
+});
 
 app.use(express.static(__dirname + '/public'));                 // set the static files location /public/img will be /img for users
 app.use(logger('dev'));                                         // log every request to the console
