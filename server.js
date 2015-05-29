@@ -18,7 +18,7 @@ app.use(bodyParser.json());                                     // parse applica
 app.use(bodyParser.json({ type: 'application/vnd.api+json' })); // parse application/vnd.api+json as json
 app.use(methodOverride());
 
-var PORT = process.env.PORT || 4000;
+var PORT =  4000;
 
 // routes
 require('./app/routes.js')(app);
