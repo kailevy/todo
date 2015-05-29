@@ -22,8 +22,28 @@ describe("Post", function() {
     .end(function(err,res) {
       (err === null).should.equal(true);
       res.should.be.json;
-      res.body[res.body.length-1]['text'].should.equal('This is a test');
+      res.body[res.body.length-1].text.should.equal('This is a test');
       done();
+    });
+  });
+});
+
+describe("Deletion", function() {
+  it("removes the oldest entry", function(done) {
+    superagent.get("http://localhost:4000/api/todos/")
+    .end(function(err,res) {
+      (err === null).should.equal(true);
+      var lastId = res.body[0]._id;
+      superagent.del("http://localhost:4000/api/todos/" + lastId)
+      .end(function(err,res) {
+        (err === null).should.equal(true);
+        superagent.get("http://localhost:4000/api/todos/")
+        .end(function(err,res) {
+          (err === null).should.equal(true);
+          res.body[0]._id.should.not.equal(lastId);
+          done();
+        });
+      });
     });
   });
 });
