@@ -40,7 +40,11 @@ describe("Deletion", function() {
         superagent.get("http://localhost:4000/api/todos/")
         .end(function(err,res) {
           (err === null).should.equal(true);
-          res.body[0]._id.should.not.equal(lastId);
+          if (res.body.length != 0) {
+            res.body[0]._id.should.not.equal(lastId);
+          } else {
+            res.body.length.should.equal(0);
+          }
           done();
         });
       });
