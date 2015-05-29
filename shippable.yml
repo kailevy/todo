@@ -5,6 +5,9 @@ node_js:
 
 build_image: shippableimages/ubuntu1404_nodejs
 
+services:
+    - mongodb
+
 before_install:
     - source ~/.nvm/nvm.sh && nvm install $SHIPPABLE_NODE_VERSION
     - node --version
