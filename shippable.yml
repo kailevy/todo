@@ -3,7 +3,7 @@ language: node_js
 node_js: 
     - 0.10
 
-# build_image: shippableimages/ubuntu1404_nodejs
+build_image: amurphy/node_mongo
 
 services:
     - mongodb
@@ -18,6 +18,12 @@ before_install:
     - mkdir -p shippable/testresults
     - mkdir -p shippable/codecoverage
 
+      # Start MongoDB
+    - . startMongo.sh
+
+    # Resetting the database in before_script makes sure that the database is always empty for consistent test results.
+    - mongo test --eval 'db.dropDatabase()'
+
 install:
     - npm install
 
@@ -27,6 +33,9 @@ script:
 after_script:
     - ./node_modules/.bin/istanbul cover grunt -- -u tdd
     - ./node_modules/.bin/istanbul report cobertura --dir  shippable/codecoverage/
+
+    # Shut down the database
+    - mongo admin --eval 'db.shutdownServer()'
 
 notifications:
     - email: false
