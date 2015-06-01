@@ -6,11 +6,22 @@ app.controller('mainCtrl', function($scope,Factory) {
     $scope.todos = data;
   });
 
+  $scope.evalPriority = function(todo) {
+    switch(todo.priority) {
+      case 0:
+        return "alert alert-info";
+      case 1:
+        return "alert alert-warning";
+      case 2:
+        return "alert alert-danger";   
+    }
+  };
+
   $scope.createTodo = function() {
     if ($scope.formData.text !== undefined) {
       Factory.create($scope.formData).success(function(data) {
         $scope.todos = data;
-        $scope.formData = {};
+        $scope.formData.text = undefined;
       });
     }
   };
@@ -18,7 +29,7 @@ app.controller('mainCtrl', function($scope,Factory) {
   $scope.deleteTodo = function(id) {
     Factory.delete(id).success(function(data) {
       $scope.todos = data;
-    })
+    });
   };
 });
 

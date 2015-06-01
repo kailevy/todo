@@ -2,7 +2,9 @@ var Todo = require('./models/todo');
 
 // function to get all todos
 function getTodos(res){
-  Todo.find(function(err, todos) {
+  Todo.find({})
+  .sort({priority: -1})
+  .exec(function(err, todos) {
     if(err) {
       res.send(err);
       }
@@ -25,7 +27,7 @@ module.exports = function(app) {
     // create a todo, information comes from AJAX request from Angular
     Todo.create({
       text : req.body.text,
-      done : false
+      priority: req.body.priority
     }, function(err, todo) {
       if (err)
         res.send(err);
