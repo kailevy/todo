@@ -3,7 +3,7 @@ var Todo = require('./models/todo');
 // function to get all todos
 function getTodos(res){
   Todo.find({})
-  .sort({priority: -1})
+  .sort({priority: -1, timestamp: 1})
   .exec(function(err, todos) {
     if(err) {
       res.send(err);
@@ -23,7 +23,7 @@ module.exports = function(app) {
 
   // create todo and send back all todos after creation
   app.post('/api/todos', function(req, res) {
-
+    console.log(req.body);
     // create a todo, information comes from AJAX request from Angular
     Todo.create({
       text : req.body.text,
@@ -38,16 +38,20 @@ module.exports = function(app) {
   });
 
   app.post('/api/todos/:todo_id', function(req, res) {
-    Todo.update({
-      text: req.body.text,
-      priority: req.body.priority
-    }, function(err, toro) {
-      if (err)
-        res.send(err);
-
+    Todo.findById(req.params.todo_id, function(err, todo){
+      if (!todo)
+        return next(new Error('Could not load Document'));
+      else {
+        todo.text = req.body.text;
+        todo.priority = req.body.priority;
+        todo.save(function(err) {
+          if (err)
+            res.send(err);
+        });
+      }
       getTodos(res);
     });
-  })
+  });
 
   // delete a todo
   app.delete('/api/todos/:todo_id', function(req, res) {

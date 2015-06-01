@@ -21,7 +21,7 @@
 
         <!-- HEADER AND TODO COUNT -->
         <div class="jumbotron text-center" ng-switch on="todos.length">
-                <h1 style="display:inline"><span class="label label-info">{{ todos.length }}</span></h1>
+                <h1 style="display:inline"><span ng-class="loadColor(todos.length)">{{ todos.length }}</span></h1>
                 <h1 ng-switch-when="1" style="display:inline">&nbsp;Task To Do</h1>
                 <h1 ng-switch-default style="display:inline">&nbsp;Tasks To Do</h1>
         </div>
@@ -36,18 +36,18 @@
                             <label>
                                 <input id="checkbox" type="checkbox" ng-click="deleteTodo(todo._id)">
                             </label>
-                            <span style="word-wrap:break-word" ng-click="editing = true">{{ todo.text }}</span>
+                            <span style="word-wrap:break-word" ng-click="editing=true; editTodo(todo)">{{ todo.text }}</span>
                         </div>
                     </div>
                     <div>
-                        <form class="form-inline" style="text-align:center" ng-show="editing" ng-submit="editing = false">
+                        <form class="form-inline" style="text-align:center" ng-show="editing" ng-submit="editing=false; updateTodo(todo._id)">
                             <div class="input-group input-group-lg">
                                 <div class="input-group input-group-sm">
-                                    <input id="formput1" class="form-control input-sm" type="text" ng-model="todo.text">          
+                                    <input id="formput1" class="form-control input-sm" type="text" ng-model="formEdit.text">          
                                 </div>
 
                                 <div class="input-group input-group-sm">
-                                    <select class="form-control" ng-model="todo.priority">
+                                    <select class="form-control" ng-model="formEdit.priority">
                                         <option value="0">!</option>
                                         <option value="1">!!</option>
                                         <option value="2">!!!</option>

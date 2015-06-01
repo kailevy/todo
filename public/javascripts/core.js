@@ -2,6 +2,7 @@ var app = angular.module('myTodo', []);
 
 app.controller('mainCtrl', function($scope,Factory) {
   $scope.formData = {};
+  $scope.formEdit = {};
   Factory.get().success(function(data) {
     $scope.todos = data;
     });
@@ -14,6 +15,17 @@ app.controller('mainCtrl', function($scope,Factory) {
         return "alert alert-warning";
       case 2:
         return "alert alert-danger";   
+    }
+  };
+
+  $scope.loadColor = function(num) {
+    switch(true) {
+      case (num < 4):
+        return "label label-info";
+      case (num > 3 && num < 10):
+        return "label label-warning";
+      case (num > 9):
+        return "label label-danger";   
     }
   };
 
@@ -35,9 +47,19 @@ app.controller('mainCtrl', function($scope,Factory) {
 // EDITING STUFF
 
   $scope.editTodo = function(todo) {
-    
+    $scope.formEdit.text = todo.text;
+    $scope.formEdit.priority = todo.priority;
   };
 
+  $scope.updateTodo = function(id) {
+    if ($scope.formEdit.text !== ""){
+      Factory.update(id,$scope.formEdit).success(function(data) {
+        Factory.get().success(function(data) {
+          $scope.todos = data;
+        });
+      });
+    }
+  };
 });
 
 app.factory('Factory', function($http){
@@ -51,8 +73,8 @@ app.factory('Factory', function($http){
     delete: function(id) {
       return $http.delete('/api/todos/' + id);
     },
-    update: function(id, todoData) {
-      return $http.post('/api/todos/' + id);
+    update: function(id, editData) {
+      return $http.post('/api/todos/' + id, editData);
     }
   };
 });
