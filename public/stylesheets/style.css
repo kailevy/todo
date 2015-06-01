@@ -9,9 +9,22 @@ a {
 
 .alert {
     padding: 0px 15px 0px 15px;
-    margin-bottom: 5px
+    margin-bottom: 5px;
 }
 
 #formput {
     width: 55rem;
+}
+
+#formput1 {
+    width: 65rem;
+}
+
+.todo-text {
+
+}
+
+#repeatable input {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
 }

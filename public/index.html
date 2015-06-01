@@ -30,32 +30,36 @@
         <div id="todo-list" class="row">
             <div class="col-sm-8 col-sm-offset-2">                
                 <!-- LOOP OVER THE TODOS IN $scope.todos -->
-                <div ng-repeat="todo in todos" ng-class="evalPriority(todo)">
-                    <div class="checkbox">
-                        <label style="word-wrap:break-word">
-                            <input id="checkbox" type="checkbox" ng-click="deleteTodo(todo._id)"> {{ todo.text }}
-                        </label>
+                <div ng-repeat="todo in todos" id="repeatable">
+                    <div ng-class="evalPriority(todo)" ng-hide="editing">
+                        <div class="checkbox">
+                            <label>
+                                <input id="checkbox" type="checkbox" ng-click="deleteTodo(todo._id)">
+                            </label>
+                            <span style="word-wrap:break-word" ng-click="editing = true">{{ todo.text }}</span>
+                        </div>
+                    </div>
+                    <div>
+                        <form class="form-inline" style="text-align:center" ng-show="editing" ng-submit="editing = false">
+                            <div class="input-group input-group-lg">
+                                <div class="input-group input-group-sm">
+                                    <input id="formput1" class="form-control input-sm" type="text" ng-model="todo.text">          
+                                </div>
+
+                                <div class="input-group input-group-sm">
+                                    <select class="form-control" ng-model="todo.priority">
+                                        <option value="0">!</option>
+                                        <option value="1">!!</option>
+                                        <option value="2">!!!</option>
+                                    </select>           
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
-
             </div>
         </div>
 
-        <!-- FORM TO CREATE TODOS -->
-        <!-- <div id="todo-form" class="row">
-            <div class="col-sm-8 col-sm-offset-2 text-center">
-                <form>
-                    <div class="form-group">
- -->
-                        <!-- BIND THIS VALUE TO formData.text IN ANGULAR -->
-<!--                         <input type="text" class="form-control input-lg text-center" placeholder="Become a superhero" ng-model="formData.text">
-                    </div>
- -->
-                    <!-- createToDo() WILL CREATE NEW TODOS -->
-<!--                     <button type="submit" class="btn btn-primary btn-lg" ng-click="createTodo()">Add</button>
-                </form>
-            </div>
-        </div> -->
     <div id="todo-form" class="row">
         <div class="col-lg-8 col-sm-offset-2 text-center">
                 <form class="form-inline">

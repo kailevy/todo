@@ -4,7 +4,7 @@ app.controller('mainCtrl', function($scope,Factory) {
   $scope.formData = {};
   Factory.get().success(function(data) {
     $scope.todos = data;
-  });
+    });
 
   $scope.evalPriority = function(todo) {
     switch(todo.priority) {
@@ -31,6 +31,13 @@ app.controller('mainCtrl', function($scope,Factory) {
       $scope.todos = data;
     });
   };
+
+// EDITING STUFF
+
+  $scope.editTodo = function(todo) {
+    
+  };
+
 });
 
 app.factory('Factory', function($http){
@@ -43,6 +50,9 @@ app.factory('Factory', function($http){
     },
     delete: function(id) {
       return $http.delete('/api/todos/' + id);
+    },
+    update: function(id, todoData) {
+      return $http.post('/api/todos/' + id);
     }
   };
 });
