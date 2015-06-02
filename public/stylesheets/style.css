@@ -7,21 +7,23 @@ a {
   color: #00B7FF;
 }
 
+td {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    word-wrap: break-word;
+}
+
 .alert {
     padding: 0px 15px 0px 15px;
     margin-bottom: 5px;
 }
 
 #formput {
-    width: 55rem;
+    width: 620px;
 }
 
 #formput1 {
-    width: 65rem;
-}
-
-.todo-text {
-
+    width: 660px;
 }
 
 #repeatable input {

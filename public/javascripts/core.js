@@ -3,6 +3,7 @@ var app = angular.module('myTodo', []);
 app.controller('mainCtrl', function($scope,Factory) {
   $scope.formData = {};
   $scope.formEdit = {};
+  $scope.displayingEditForm = null;
   Factory.get().success(function(data) {
     $scope.todos = data;
     });
@@ -20,7 +21,9 @@ app.controller('mainCtrl', function($scope,Factory) {
 
   $scope.loadColor = function(num) {
     switch(true) {
-      case (num < 4):
+      case (num == 0):
+        return "label label-success";
+      case (num < 4 && num > 0):
         return "label label-info";
       case (num > 3 && num < 10):
         return "label label-warning";
@@ -46,6 +49,18 @@ app.controller('mainCtrl', function($scope,Factory) {
 
 // EDITING STUFF
 
+  $scope.startEdit = function(id) {
+    $scope.displayingEditForm = id;
+  }
+
+  $scope.endEdit = function() {
+    $scope.displayingEditForm = null;
+  }
+
+  $scope.editingThisForm = function(id) {
+    return $scope.displayingEditForm == id;
+  }
+
   $scope.editTodo = function(todo) {
     $scope.formEdit.text = todo.text;
     $scope.formEdit.priority = todo.priority;
@@ -61,6 +76,8 @@ app.controller('mainCtrl', function($scope,Factory) {
     }
   };
 });
+
+// LINK TO API METHODS
 
 app.factory('Factory', function($http){
   return {

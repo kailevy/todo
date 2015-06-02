@@ -31,16 +31,25 @@
             <div class="col-sm-8 col-sm-offset-2">                
                 <!-- LOOP OVER THE TODOS IN $scope.todos -->
                 <div ng-repeat="todo in todos" id="repeatable">
-                    <div ng-class="evalPriority(todo)" ng-hide="editing">
-                        <div class="checkbox">
-                            <label>
-                                <input id="checkbox" type="checkbox" ng-click="deleteTodo(todo._id)">
-                            </label>
-                            <span style="word-wrap:break-word" ng-click="editing=true; editTodo(todo)">{{ todo.text }}</span>
-                        </div>
+                    <div ng-class="evalPriority(todo)" ng-hide="editing && editingThisForm(todo._id)">
+                        <table style="table-layout:fixed; width:100%">
+                            <colgroup>
+                                <col style="width:4%">
+                                <col style="width:96%">
+                            </colgroup>
+                            <tr><td>
+                                <div class="checkbox">
+                                    <label>
+                                        <input id="checkbox" type="checkbox" ng-click="deleteTodo(todo._id)">
+                                    </label>
+                                </div>
+                            </td><td>
+                            <span class="checkbox-entries" ng-click="editing=true; startEdit(todo._id); editTodo(todo)">{{ todo.text }}</span>
+                            </td></tr>
+                        </table>
                     </div>
                     <div>
-                        <form class="form-inline" style="text-align:center" ng-show="editing" ng-submit="editing=false; updateTodo(todo._id)">
+                        <form class="form-inline" style="text-align:center" ng-show="editing && editingThisForm(todo._id)" ng-submit="editing=false; endEdit(); updateTodo(todo._id)">
                             <div class="input-group input-group-lg">
                                 <div class="input-group input-group-sm">
                                     <input id="formput1" class="form-control input-sm" type="text" ng-model="formEdit.text">          

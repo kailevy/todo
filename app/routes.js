@@ -14,8 +14,6 @@ function getTodos(res){
 }
 
 module.exports = function(app) {
-
-
   app.get('/api/todos', function(req, res) {
 
     getTodos(res);
