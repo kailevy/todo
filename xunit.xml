@@ -1,5 +1,6 @@
-<testsuite name="Mocha Tests" tests="3" failures="0" errors="0" skipped="0" timestamp="Fri, 29 May 2015 20:31:35 GMT" time="0.063">
-<testcase classname="Index" name="renders HTML" time="0.014"/>
-<testcase classname="Post" name="sends a post request" time="0.037"/>
-<testcase classname="Deletion" name="removes the oldest entry" time="0.009"/>
+<testsuite name="Mocha Tests" tests="4" failures="0" errors="0" skipped="0" timestamp="Tue, 02 Jun 2015 21:15:23 GMT" time="0.074">
+<testcase classname="Index" name="renders HTML" time="0.015"/>
+<testcase classname="Creation" name="sends a post request, making a new document in database" time="0.034"/>
+<testcase classname="Editing" name="sends a post request, editing a document in database" time="0.014"/>
+<testcase classname="Deletion" name="removes the oldest entry" time="0.008"/>
 </testsuite>
