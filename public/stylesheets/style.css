@@ -24,12 +24,17 @@ td {
     margin-bottom: 5px;
 }
 
+.date {
+    font-family: 'FontAwesome';
+    font-size: 10px;
+}
+
 #formput {
-    width: 62rem;
+    width: 57rem;
 }
 
 #formput1 {
-    width: 63rem;
+    width: 62rem;
 }
 
 #repeatable input {

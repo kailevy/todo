@@ -36,7 +36,8 @@
                         <table style="table-layout:fixed; width:100%">
                             <colgroup>
                                 <col style="width:4%">
-                                <col style="width:96%">
+                                <col style="width:85%">
+                                <col style="width:10%">
                             </colgroup>
                             <tr><td>
                                 <div class="checkbox">
@@ -46,16 +47,19 @@
                                 </div>
                             </td><td>
                             <span class="checkbox-entries" ng-click="editing=true; startEdit(todo._id); editTodo(todo)">{{ todo.text }}</span>
-                            </td></tr>
+                            </td><td style="text-align:center">
+                            <span class="date">{{todo.created_at | date:"M/d ',' h:mma"}}<br></span>
+                            <span class="date" ng-if="todo.edit">Edited at <br>{{todo.updated_at | date:"M/d ',' h:mma"}}</span></tr>
                         </table>
                     </div>
                     <div>
                         <form class="form-inline" style="text-align:center" ng-show="editing && editingThisForm(todo._id)">
-                            <div class="input-group input-group-lg">
-                                <div class="input-group input-group-sm">
+                            <div class="input-group input-group-sm">
+                                <div class="input-group input-group-sm" >
+                                    <span class="input-group-btn" style="font-size:12px">
+                                        <button class="btn btn-default" type="button" ng-click="editing=false; endEdit()"><i class="fa fa-undo"></i></button></span>
                                     <input id="formput1" class="form-control input-sm" type="text" ng-model="formEdit.text">          
                                 </div>
-
                                 <div class="input-group input-group-sm">
                                     <select class="form-control" ng-model="formEdit.priority">
                                         <option value="0">!</option>
@@ -63,8 +67,8 @@
                                         <option value="2">!!!</option>
                                     </select>           
                                 </div>
-                                &nbsp;
-                            <button type="submit" class="btn btn-primary btn-sm" ng-click="editing=false; endEdit(); updateTodo(todo._id)">Save</button>
+                                <span style="font-size:10px">&nbsp;</span>
+                            <button type="submit" class="btn btn-primary btn-sm" ng-click="editing=false; endEdit(); updateTodo(todo._id)"><i class="fa fa-thumb-tack"></i></button>
                             </div>
                         </form>
                     </div>
@@ -76,7 +80,8 @@
         <div class="col-lg-8 col-sm-offset-2 text-center">
                 <form class="form-inline">
                     <div class="input-group input-group-lg">
-                        <span class="input-group-addon"><i class="fa fa-pencil"></i></span>
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="reset"><i class="fa fa-pencil"></i></button></span>
 
                         <div class="input-group input-group-lg">
                             <input id="formput" class="form-control input-lg" type="text" placeholder="Ship some code" ng-model="formData.text">          
@@ -90,7 +95,7 @@
                             </select>           
                         </div>
                     </div>
-                    <br><br><button type="submit" class="btn btn-primary btn-lg" ng-click="createTodo()">Add</button>
+                    <button type="submit" class="btn btn-primary btn-lg" ng-click="createTodo()"><i class="fa fa-thumb-tack"></i></button>
                 </form>
             </div>
         </div>

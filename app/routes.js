@@ -1,9 +1,10 @@
-var Todo = require('./models/todo');
+var todoModel = require('./models/todo');
+var Todo = todoModel.Todo
 
 // function to get all todos
 function getTodos(res){
   Todo.find({})
-  .sort({priority: -1, timestamp: 1})
+  .sort({priority: -1, created_at: 1})
   .exec(function(err, todos) {
     if(err) {
       res.send(err);
@@ -42,6 +43,7 @@ module.exports = function(app) {
       else {
         todo.text = req.body.text;
         todo.priority = req.body.priority;
+        todo.edit = true;
         todo.save(function(err) {
           if (err)
             res.send(err);
