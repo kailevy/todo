@@ -15,7 +15,6 @@ mongoose.connect(mongoURI, function(err) {
   } else {
     console.log(err);
   }
-
 });
 
 app.use(express.static(__dirname + '/public'));                 // set the static files location /public/img will be /img for users

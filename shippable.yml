@@ -9,7 +9,7 @@ services:
     - mongodb
 
 env:
-  - XUNIT_FILE=shippable/testresults/result.xml
+    - XUNIT_FILE=shippable/testresults/result.xml
 
 before_install:
     - source ~/.nvm/nvm.sh && nvm install $SHIPPABLE_NODE_VERSION
