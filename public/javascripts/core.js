@@ -6,6 +6,9 @@ app.controller('mainCtrl', function($scope,Factory) {
   $scope.displayingEditForm = null;
   Factory.get().success(function(data) {
     $scope.todos = data;
+    })
+    .error(function(reason) {
+      alert(reason);
     });
 
   $scope.evalPriority = function(todo) {
@@ -21,7 +24,7 @@ app.controller('mainCtrl', function($scope,Factory) {
 
   $scope.loadColor = function(num) {
     switch(true) {
-      case (num == 0):
+      case (num === 0):
         return "label label-success";
       case (num < 4 && num > 0):
         return "label label-info";
@@ -51,15 +54,15 @@ app.controller('mainCtrl', function($scope,Factory) {
 
   $scope.startEdit = function(id) {
     $scope.displayingEditForm = id;
-  }
+  };
 
   $scope.endEdit = function() {
     $scope.displayingEditForm = null;
-  }
+  };
 
   $scope.editingThisForm = function(id) {
     return $scope.displayingEditForm == id;
-  }
+  };
 
   $scope.editTodo = function(todo) {
     $scope.formEdit.text = todo.text;
@@ -80,18 +83,19 @@ app.controller('mainCtrl', function($scope,Factory) {
 // LINK TO API METHODS
 
 app.factory('Factory', function($http){
+  BASE_URL = "http://localhost:4001"
   return {
     get: function() {
-      return $http.get('/api/todos');
+      return $http.get(BASE_URL + '/api/todos');
     },
     create: function(todoData) {
-      return $http.post('/api/todos', todoData);
+      return $http.post(BASE_URL + '/api/todos', todoData);
     },
     delete: function(id) {
-      return $http.delete('/api/todos/' + id);
+      return $http.delete(BASE_URL + '/api/todos/' + id);
     },
     update: function(id, editData) {
-      return $http.post('/api/todos/' + id, editData);
+      return $http.post(BASE_URL + '/api/todos/' + id, editData);
     }
   };
 });
